@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http:/www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+    <title>Converter</title>
+    <style>
+        .custom-select {
+            margin: 15px 0 15px 0;
+        }
+        .form-control {
+            margin: 0px 0 15px 0;
+        }
+        .col-12 {
+            text-align: center;
+        }
+        .btn-dark {
+            width: 50%;
+            margin: 0 auto;
+        }
+        .heading {
+            text-align: center;
+            margin: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="heading col-12">
+            <h1>Konwerter walut - Marcin Sekuła</h1>
+            <div th:if="${msg}">
+                <h3 th:text="${msg}"/>
+            </div>
+        </div>
+    </div>
+    <form action="/" method="post">
+        <div class="row">
+            <div class="col-6" >
+                <select name="firstCurrency" id="fromCurrencyList" class="custom-select">
+                        <option th:if="${defCurr1}" th:text="${defCurr1}"></option>
+                        <option th:each="currency:${currencies}" th:utext="${currency.name}" th:value="${currency.code}"></option>
+                </select>
+                <input name="valuefrom" th:value="${valueFrom}" type="text" class="form-control">
+            </div>
+            <div class="col-6">
+                <select id="toCurrencyList" class="custom-select" name="secondCurrency">
+                    <option th:if="${defCurr2}" th:text="${defCurr2}"></option>
+                    <option th:each="currency:${currencies}" th:utext="${currency.name}" th:value="${currency.code}"></option>
+                </select>
+                <input disabled id="valueto" type="text" th:value="${exchange}" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <input class="btn btn-dark" type="submit" value="Przelicz">
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
